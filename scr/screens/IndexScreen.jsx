@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { View, Text, StyleSheet, FlatList, Button, TouchableOpacity } from 'react-native'
 import { Context as BlogContext } from '../context/BlogContext'
 import { MaterialIcons } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons'; 
 
 const IndexScreen = ({ navigation }) => {
   const { state, addBlogPost, deleteBlogPost } = useContext(BlogContext);
@@ -27,6 +28,16 @@ const IndexScreen = ({ navigation }) => {
       /> 
     </View>
   )
+}
+
+IndexScreen.navigationOptions = ({ navigation }) => {
+  return {
+    headerRight: (
+      <TouchableOpacity onPress={() => navigation.navigate("Create")} >
+        <Entypo name="plus" size={24} color="black" />
+      </TouchableOpacity>
+    )
+  }
 }
 
 const style = StyleSheet.create({
