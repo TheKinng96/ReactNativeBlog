@@ -2,7 +2,7 @@ import React from 'react'
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import IndexScreen from './scr/screens/IndexScreen'
-import { BlogProvider } from './scr/context/BlogContext';
+import { Provider as BlogProvider } from './scr/context/BlogContext';
 
 const navigator = createStackNavigator({
   Index: IndexScreen,
