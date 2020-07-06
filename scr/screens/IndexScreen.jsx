@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import { View, Text, StyleSheet, FlatList, Button } from 'react-native'
+import { View, Text, StyleSheet, FlatList, Button, TouchableOpacity } from 'react-native'
 import { Context as BlogContext } from '../context/BlogContext'
 import { MaterialIcons } from '@expo/vector-icons'; 
 
-const IndexScreen = () => {
-  const { state, addBlogPost } = useContext(BlogContext);
+const IndexScreen = ({ navigation }) => {
+  const { state, addBlogPost, deleteBlogPost } = useContext(BlogContext);
 
   return (
     <View>
@@ -13,10 +13,16 @@ const IndexScreen = () => {
         data={state}
         keyExtractor={(blogPost) => blogPost.title }
         renderItem={({ item }) => {
-          return <View style={style.row}>
-            <Text style={style.title}>{item.title}</Text>
-            <MaterialIcons name="delete" style={style.icon} color="black" />
-          </View>
+          return (
+            <TouchableOpacity onPress={()=> navigation.navigate("Detail", {id:item.id})}>
+              <View style={style.row}>
+                <Text style={style.title}>{item.title} - {item.id}</Text>
+                <TouchableOpacity onPress={()=> deleteBlogPost(item.id)}>
+                  <MaterialIcons name="delete" style={style.icon} color="black" />  
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
+          )
         }}
       /> 
     </View>
